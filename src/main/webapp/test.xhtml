@@ -1,16 +1,69 @@
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:h="http://java.sun.com/jsf/html">
-
-    <h:head>   
-        <title>PrimeFaces Test</title>
-    </h:head>
-    <h:body>
-        
-        <h1>#{testView.testString}</h1>
-        
-    </h:body>
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head></h:head>
+<h:body>
+	<h:form>
+		<p:dataTable id="testtable" value="#{datatabletest.customers}"
+			var="customer" paginator="true" rows="50"
+			paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+			rowsPerPageTemplate="10,50,100,200" stickyHeader="true"
+			filterDelay="1000" sortBy="#{customer.firstname}"
+			binding="#{datatabletest.dataTable}">
+			<p:columnGroup type="header">
+				<p:row>
+					<p:column colspan="2" headerText="Bulkedit:">
+						<f:facet name="header">
+							<h:outputText value="Bulkedit:" style="float:right;" />
+						</f:facet>
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<p:selectOneMenu id="gender-bulkedit">
+								<f:selectItem itemValue="---" itemLabel="---" />
+								<f:selectItems value="#{datatabletest.genderList}" />
+							</p:selectOneMenu>
+						</f:facet>
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column filterBy="#{customer.firstname}"
+						sortBy="#{customer.firstname}">
+						<f:facet name="header">
+	                			Firstname
+	                		</f:facet>
+					</p:column>
+					<p:column filterBy="#{customer.lastname}"
+						sortBy="#{customer.lastname}">
+						<f:facet name="header">
+	                			Lastname
+	                		</f:facet>
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+	                			Gender
+	                		</f:facet>
+					</p:column>
+				</p:row>
+			</p:columnGroup>
+			<p:column>
+				<h:outputText value="#{customer.firstname}" />
+			</p:column>
+			<p:column>
+				<h:outputText value="#{customer.lastname}" />
+			</p:column>
+			<p:column>
+				<p:outputPanel rendered="#{not empty customer}" required="false">
+					<p:selectOneMenu value="#{customer.gender}" id="gender-select" >
+						<f:selectItems value="#{datatabletest.genderList}" />
+					</p:selectOneMenu>
+				</p:outputPanel>
+			</p:column>
+		</p:dataTable>
+	</h:form>
+</h:body>
 </html>
