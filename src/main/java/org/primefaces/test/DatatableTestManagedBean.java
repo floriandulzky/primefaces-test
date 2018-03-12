@@ -25,19 +25,22 @@ public class DatatableTestManagedBean {
 	private List<String> genderList;
 	private DataTable dataTable;
 	private SelectOneMenu selectOneMenu;
+	private int i = 0;
 	
 	@PostConstruct
 	public void init() {
 		this.customers = new ArrayList<Customer>();
-		this.customers.add(new Customer("Florian", "D.", "Male"));
-		this.customers.add(new Customer("Christian", "K.", "Female"));
+		for(int i = 0; i < 20; i++) {
+			this.customers.add(new Customer("Florian " + i, "D.", "Male"));
+			this.customers.add(new Customer("Christian " + i, "K.", "Female"));			
+		}
 		this.genderList = new ArrayList<String>();
 		this.genderList.add("Male");
 		this.genderList.add("Female");
 	}
 	
-	public void test() {
-		System.out.println("value changed???");
+	public void testAction() {
+		System.out.println("action called " + ++i);
 	}
 	
 	public boolean validateSelectOneMenu(FacesContext context, UIComponent componentToValidate, Object value) {
