@@ -10,11 +10,9 @@
 	<h:form style="height: 100%;">
 		<p:commandButton action="#{datatabletest.testAction()}" value="testAction"/>
 		<p:dataTable id="testtable" value="#{datatabletest.customers}"
-			var="customer" paginator="true" rows="50"
-			paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
-			rowsPerPageTemplate="10,50,100,200" stickyHeader="true"
+			var="customer" 
 			filterDelay="1000" sortBy="#{customer.firstname}"
-			binding="#{datatabletest.dataTable}" scrollHeight="50%" scrollable="true" style="height: 50%;">
+			binding="#{datatabletest.dataTable}" >
 			<p:column headerText="Firstname" filterBy="#{customer.firstname}">
 				<h:outputText value="#{customer.firstname}" />
 			</p:column>
