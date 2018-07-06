@@ -2,18 +2,19 @@ package org.primefaces.test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.component.UIComponent;
-import javax.faces.component.html.HtmlDataTable;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
 
 import org.primefaces.component.datatable.DataTable;
 import org.primefaces.component.selectonemenu.SelectOneMenu;
 import org.primefaces.model.LazyDataModel;
+import org.primefaces.model.SortOrder;
 
 
 @ViewScoped
@@ -30,10 +31,33 @@ public class DatatableTestManagedBean {
 	
 	@PostConstruct
 	public void init() {
+		this.lazyCustomer = new LazyDataModel<Customer>() {
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public List<Customer> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String,Object> filters) {
+				System.out.println("Customers: " + customers.size());
+				this.setRowCount( customers.size() );
+				return customers.subList(first, first + pageSize);
+			}
+			
+		};
 		this.customers = new ArrayList<Customer>();
 		for(int i = 0; i < 20; i++) {
-			this.customers.add(new Customer("Florian " + i, "D.", "Male"));
-			this.customers.add(new Customer("Christian " + i, "K.", "Female"));			
+			this.customers.add(new Customer("Christian " + i, "K.", "Female"));
+			this.customers.add(new Customer("Florian " + i, "K.", "Female"));
+		}
+		for(int i = 0; i < 25; i++) {
+			this.customers.add(new Customer("Florian " + i, "D.", "Female"));
+			this.customers.add(new Customer("Christian " + i, "D.", "Female"));
+		}
+		for(int i = 0; i < 19; i++) {
+			this.customers.add(new Customer("Christian " + i, "K.", "Female"));
+			this.customers.add(new Customer("Florian " + i, "K.", "Male"));
+		}
+		for(int i = 0; i < 29; i++) {
+			this.customers.add(new Customer("Florian " + i, "D.", "Female"));
+			this.customers.add(new Customer("Christian " + i, "D.", "Male"));
 		}
 		this.genderList = new ArrayList<String>();
 		this.genderList.add("Male");
