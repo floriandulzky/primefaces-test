@@ -10,22 +10,45 @@
 	<h:form style="height: 100%;">
 		<p:commandButton action="#{datatabletest.testAction()}" value="testAction"/>
 		<p:dataTable id="testtable" value="#{datatabletest.customers}"
-			var="customer" 
+			var="customer" editable="true"
 			filterDelay="1000" sortBy="#{customer.firstname}"
 			binding="#{datatabletest.dataTable}" >
-			<p:column headerText="Firstname" filterBy="#{customer.firstname}">
-				<h:outputText value="#{customer.firstname}" />
+			<p:column>
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{customer.firstname}"/>
+					</f:facet>
+					<f:facet name="input">
+						<h:outputText value="#{customer.firstname}" />						
+					</f:facet>
+				</p:cellEditor>
 			</p:column>
 			<p:column headerText="Lastname" filterBy="#{customer.lastname}">
-				<h:outputText value="#{customer.lastname}" />
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{customer.lastname}"/>
+					</f:facet>
+					<f:facet name="input">
+						<h:outputText value="#{customer.lastname}" />						
+					</f:facet>
+				</p:cellEditor>
 			</p:column>
 			<p:column>
-				<f:facet name="header">
-					<p:commandButton action="#{datatabletest.testAction()}" value="testAction"/>
-				</f:facet>
 				<p:outputPanel rendered="#{not empty customer}" required="false">
-					<h:outputText value="#{customer.gender}"/>
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{customer.gender}"/>
+						</f:facet>
+						<f:facet name="input">
+							<p:selectOneMenu value="#{customer.gender}" id="gender-select" >
+								<f:selectItems value="#{datatabletest.genderList}" />
+							</p:selectOneMenu>
+						</f:facet>
+					</p:cellEditor>
 				</p:outputPanel>
+			</p:column>
+			<p:column>
+				<p:rowEditor id="row-edit" />
 			</p:column>
 		</p:dataTable>
 		<h:dataTable id="testtable1" value="#{datatabletest.customers}"
