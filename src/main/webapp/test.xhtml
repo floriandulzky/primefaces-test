@@ -1,33 +1,18 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:c="http://java.sun.com/jsp/jstl/core"
-	xmlns:p="http://primefaces.org/ui" style="height:100%;">
-<h:head></h:head>
-<h:body style="height: calc(100% - 20px);">
-	<h:form style="height: 100%;">
-		<p:dataTable id="testtable" value="#{datatabletest.customers}"
-			var="customer" paginator="true" rows="50"
-			paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
-			rowsPerPageTemplate="10,50,100,200" stickyHeader="true"
-			filterDelay="1000" sortBy="#{customer.firstname}"
-			binding="#{datatabletest.dataTable}" scrollHeight="100%" scrollable="true" style="height: 100%;">
-			<p:column headerText="Firstname" filterBy="#{customer.firstname}">
-				<h:outputText value="#{customer.firstname}" />
-			</p:column>
-			<p:column headerText="Lastname" filterBy="#{customer.lastname}">
-				<h:outputText value="#{customer.lastname}" />
-			</p:column>
-			<p:column>
-				<p:outputPanel rendered="#{not empty customer}" required="false">
-					<p:selectOneMenu value="#{customer.gender}" id="gender-select" >
-						<f:selectItems value="#{datatabletest.genderList}" />
-					</p:selectOneMenu>
-				</p:outputPanel>
-			</p:column>
-		</p:dataTable>
-	</h:form>
-</h:body>
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+    <h:head>
+        <title>PrimeFaces Test</title>
+    </h:head>
+    <h:body>
+
+        <h1>#{testView.testString}</h1>
+
+        <h1>#{testViewCdi.testString}</h1>
+
+    </h:body>
 </html>
