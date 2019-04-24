@@ -9,18 +9,65 @@
 <h:body style="height: calc(100% - 20px);">
 	<h:form style="height: 100%;">
 		<p:dataTable id="testtable" value="#{datatabletest.lazyCustomer}" scrollHeight="500"
-			var="customer" scrollable="true" scrollRows="35" rows="35" lazy="true" liveScroll="true"
-			filterDelay="1000" scrollWidth="500" frozenColumns="1" >
-			<p:column headerText="Firstname" style="width: 200px;">
-				<h:outputText value="#{customer.firstname}"  />						
+			var="customer" scrollable="true" scrollRows="35" rows="35" lazy="true" 
+			resizableColumns="true" scrollWidth="800"
+			frozenColumns="1" filterDelay="1000" resizeMode="expand">
+			<f:facet name="header">
+				Frozen Column
+			</f:facet>
+			<p:columnGroup type="header">
+				<p:row>
+					<p:column headerText="Group" colspan="3" />
+				</p:row>
+				<p:row>
+					<p:column headerText="Firstname" sortBy="#{customer.firstname}" filterBy="#{customer.firstname}" resizable="false" />
+					<p:column headerText="Lastname" sortBy="#{customer.lastname}"  filterBy="#{customer.firstname}"/>
+					<p:column headerText="Gender" sortBy="#{customer.gender}"  filterBy="#{customer.firstname}"/>
+				</p:row>
+			</p:columnGroup>
+			<p:column resizable="false">
+				<h:outputText value="#{customer.firstname}"  />
+				<br />
+				<h:outputText value="#{customer.firstname}"  />
 			</p:column>
-			<p:column headerText="Lastname" groupRow="true" >
+			<p:column groupRow="true" sortBy="#{customer.lastname}" filterBy="#{customer.firstname}">
 				<h:outputText value="#{customer.lastname}" />						
 			</p:column>
-			<p:column headerText="Gender" resizable="true" >
+			<p:column resizable="true" sortBy="#{customer.gender}" filterBy="#{customer.firstname}">
 				<h:outputText value="#{customer.gender}" />
 			</p:column>
 		</p:dataTable>
+		
+		<p:dataTable id="testtable1" value="#{datatabletest.lazyCustomer}" scrollHeight="500"
+			var="customer" scrollable="true" scrollRows="35" rows="35" lazy="true" 
+			resizableColumns="true" scrollWidth="800"
+			filterDelay="1000" resizeMode="expand">
+			<f:facet name="header">
+				NO Frozen Column
+			</f:facet>
+			<p:columnGroup type="header">
+				<p:row>
+					<p:column headerText="Group" colspan="3" />
+				</p:row>
+				<p:row>
+					<p:column headerText="Firstname" sortBy="#{customer.firstname}" filterBy="#{customer.firstname}" resizable="false" />
+					<p:column headerText="Lastname" sortBy="#{customer.lastname}"  filterBy="#{customer.firstname}"/>
+					<p:column headerText="Gender" sortBy="#{customer.gender}"  filterBy="#{customer.firstname}"/>
+				</p:row>
+			</p:columnGroup>
+			<p:column resizable="false">
+				<h:outputText value="#{customer.firstname}"  />
+				<br />
+				<h:outputText value="#{customer.firstname}"  />
+			</p:column>
+			<p:column groupRow="true" sortBy="#{customer.lastname}" filterBy="#{customer.firstname}">
+				<h:outputText value="#{customer.lastname}" />						
+			</p:column>
+			<p:column resizable="true" sortBy="#{customer.gender}" filterBy="#{customer.firstname}">
+				<h:outputText value="#{customer.gender}" />
+			</p:column>
+		</p:dataTable>
+		
 	</h:form>
 </h:body>
 </html>

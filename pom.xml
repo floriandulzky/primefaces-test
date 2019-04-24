@@ -13,12 +13,30 @@
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+    
+    <repositories>
+		<repository>
+			<id>nts</id>
+			<name>NTS-Internal Repo</name>
+			<url>http://172.21.200.20:8080/repository/internal/</url>
+		</repository>
+		<repository>
+            <id>primefaces</id>
+            <name>PrimeFaces Maven Repository</name>
+            <url>http://repository.primefaces.org</url>
+            <layout>default</layout>
+        </repository>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>	
+	</repositories>
 
     <dependencies>
         <dependency>
             <groupId>org.primefaces</groupId>
             <artifactId>primefaces</artifactId>
-            <version>7.0</version>
+            <version>7.0.1</version>
         </dependency>
 
         <!-- javax.* APIs -->
@@ -80,19 +98,6 @@
         </dependency>
     </dependencies>
     
-    <repositories>
-        <repository>
-            <id>primefaces</id>
-            <name>PrimeFaces Maven Repository</name>
-            <url>http://repository.primefaces.org</url>
-            <layout>default</layout>
-        </repository>
-        <repository>
-            <id>jitpack.io</id>
-            <url>https://jitpack.io</url>
-        </repository>
-    </repositories>
-
     <build>
         <plugins>
             <plugin>
